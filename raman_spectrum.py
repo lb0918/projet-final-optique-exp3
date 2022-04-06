@@ -6,6 +6,7 @@ from scipy.signal import find_peaks
 
 class RamanSpectrum:
     def __init__(self, fich, promi):
+        # self.data = np.genfromtxt(fich, delimiter='     ')
         self.data = np.genfromtxt(fich, delimiter=',')
         self.raman = self.data[:, 1]
         self.counts = self.data[:, 2]
@@ -63,11 +64,13 @@ iso25 = RamanSpectrum('Vrai\iso_25_100s5.TXT', 10000)
 iso100 = RamanSpectrum('Vrai\iso_100_100s5.TXT', 10000)
 eau = RamanSpectrum('Vrai\eau_dist_robinet2.TXT', 10000)
 meth = RamanSpectrum('meth.TXT', 10000)
-iso50.graph_zero(peaks=True)
+absolut = RamanSpectrum('Mesures bonnes\absolut11_1.txt', 10000)
+# iso50.graph_zero(peaks=True)
 # iso75.graph_zero(peaks=True)
 # iso25.graph_zero(peaks=True)
 # iso100.graph_zero(peaks=True)
 # eau.graph_zero(peaks=True)
 # meth.graph_zero(peaks=True)
 # Hg.graph_zero(peaks=True)
+absolut.graph_zero(peaks=True)
 plt.show()
