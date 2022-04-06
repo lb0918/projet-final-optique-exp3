@@ -19,7 +19,7 @@ cm = 1/(632.8e-7) - 1/(nm*1e-7)
 i=0
 
 # Spectre
-for file in glob.glob("Mesures bonnes\/rhum_brun2_1.txt"):
+for file in glob.glob("Mesures bonnes\/eth_1001_1.txt"):
     soln = file.split("_")[2]
     df = pd.read_csv(file)
     y = df.iloc[:, 2]
@@ -34,7 +34,7 @@ plt.show()
 plt.clf()
 
 
-for file in glob.glob("Mesures bonnes\/rhum_brun2_1.txt"):
+for file in glob.glob("Mesures bonnes\/eth_1001_1.txt"):
     soln = file.split("_")[2]
     print(soln)
     df = pd.read_csv(file)
@@ -43,7 +43,7 @@ for file in glob.glob("Mesures bonnes\/rhum_brun2_1.txt"):
     d = 25
     f2 = interpolate.interp1d(cm[200:][::d], y[200:][::d], kind='quadratic')
     y = y[200:1200]-f2(cm[200:1200])
-    y = y / max(y)
+    # y = y / max(y)
     mask_1444 = (cm[200:1200] > 1400) & (cm[200:1200] < 1500)
     mask_1661 = (cm[200:1200] > 1600) & (cm[200:1200] < 1700)
     I_1444 = max(y[mask_1444])
@@ -52,6 +52,8 @@ for file in glob.glob("Mesures bonnes\/rhum_brun2_1.txt"):
     plt.plot(cm[200:1200], y+2*i, label=f"{soln}", linewidth=0.5)
     print(f"r: {I_1444/I_1661*100:.2f}%")
     i += 1
+
+donnees_modif = np.array(cm[200:1200], y)
         
 plt.xlabel("ν [1/cm]")
 plt.ylabel("Intensité relative [-]")
