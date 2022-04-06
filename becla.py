@@ -34,3 +34,13 @@ for i in peaks100:
 
 plt.plot(alco, bons_peaks)
 plt.show()
+
+pente, valinit = np.polyfit(alco, bons_peaks, 1)
+
+rhum_blanc = RamanSpectrum("Mesures bonnes\/rhum_blanc1_1.txt", 1800)
+
+for i in rhum_blanc.getDanPeaks():
+    if 840 < i[0] < 850:
+        rhum_blanc_peak = i[1]
+
+print((rhum_blanc_peak+valinit)/pente)
