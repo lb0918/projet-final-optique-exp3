@@ -61,9 +61,11 @@ class RamanSpectrum:
             points_maxi.append(ens_fin[int(x)])
         return points_maxi
 
-    def codeDan(self):
+    def codeDan(self, *args):
         px = [625, 882, 1134, 1149]
         nm = [671, 690, 708, 709]
+        # px = [611, 867, 1119, 1134]
+        # nm = [671, 690, 708, 709]
 
         slope, intercept, r_value, p_value, std_err = stats.linregress(px, nm)
         print(f"a={slope:.5f}", f"b={intercept:.3f}",f"σ={std_err:.3e}")
@@ -104,12 +106,14 @@ class RamanSpectrum:
             mask_1661 = (cm[200:1200] > 1600) & (cm[200:1200] < 1700)
             I_1444 = max(y[mask_1444])
             I_1661 = max(y[mask_1661])
-            # plt.plot(cm[200:1200], f2(cm[200:1200]), label=f"{soln}", linewidth=0.5) # Background
-            # plt.plot(cm[200:1200], y+2*i, label=f"{soln}", linewidth=0.5)
+            if args == "plot":
+                plt.plot(cm[200:1200], f2(cm[200:1200]), label=f"{soln}", linewidth=0.5) # Background
+                plt.plot(cm[200:1200], y+2*i, label=f"{soln}", linewidth=0.5)
             print(f"r: {I_1444/I_1661*100:.2f}%")
             i += 1
 
         self.data_Dan = np.array([cm[200:1200], y]).T
+        return self.data_Dan
 
         #plt.xlabel("ν [1/cm]")
         #plt.ylabel("Intensité relative [-]")
@@ -136,3 +140,4 @@ class RamanSpectrum:
             points_maxi.append(ens_fin[int(x)])
         return points_maxi
 
+    

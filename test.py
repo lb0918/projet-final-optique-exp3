@@ -5,7 +5,7 @@ from scipy.signal import find_peaks
 
 
 
-fich = 'huile_ethanol5.TXT'
+fich = 'Mesures bonnes/absolut11_1.txt'
 f = open(fich, 'r')
 a = f.readlines()
 counts = []
