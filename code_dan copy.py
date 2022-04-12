@@ -23,7 +23,7 @@ for file in glob.glob("Mesures bonnes\/eth_1001_1.txt"):
     soln = file.split("_")[2]
     df = pd.read_csv(file)
     y = df.iloc[:, 2]
-    y = y / max(abs(y))
+    #y = y / max(abs(y))
     plt.plot(nm, y, label=f"{soln}", linewidth=0.5)
 
 plt.xlabel("$\lambda$ [nm]")
