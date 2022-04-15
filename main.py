@@ -11,7 +11,6 @@ def graph_tot(fich):
         ele = x.split(',')
         raman.append(float(ele[1]))
         counts.append(float(ele[2]))
-
     plt.plot(raman, counts)
     plt.xlabel('Raman shift')
     plt.ylabel('Counts')
