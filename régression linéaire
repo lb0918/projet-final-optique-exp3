@@ -1,0 +1,12 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from becla import x, projection, alco, bons_peaks
+
+
+plt.plot(alco, bons_peaks, "o", label="Données expérimentales")
+plt.plot(x, projection, "--", color="black", label="Régression linéaire")
+plt.ylabel("Nombre de photons")
+plt.xlabel("Pourcentage d'alcool")
+plt.legend()
+plt.savefig("figures\/reg_lin")
+plt.show()

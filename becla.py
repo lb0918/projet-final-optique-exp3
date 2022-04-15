@@ -7,11 +7,11 @@ eth25 = RamanSpectrum("Mesures bonnes\eth_251_1.txt", 1800)
 eth50 = RamanSpectrum("Mesures bonnes\eth_501_1.txt", 1800)
 eth75 = RamanSpectrum("Mesures bonnes\eth_751_1.txt", 1800)
 eth100 = RamanSpectrum("Mesures bonnes\eth_1001_1.txt", 1800)
-eth25.graph_zero()
-eth50.graph_zero()
-eth75.graph_zero()
-eth100.graph_zero()
-plt.show()
+# eth25.graph_zero()
+# eth50.graph_zero()
+# eth75.graph_zero()
+# eth100.graph_zero()
+# plt.show()
 
 peaks25 = eth25.getDanPeaks()
 peaks50 = eth50.getDanPeaks()
@@ -27,19 +27,19 @@ bons_peaks = []
 alco = [25, 50, 75, 100]
 print(peaks25)
 for i in peaks25:
-    if 390 < i[0] < 400:
+    if 840 < i[0] < 850:
         bons_peaks.append(i[1])
 
 for i in peaks50:
-    if 390 < i[0] < 400:
+    if 840 < i[0] < 850:
         bons_peaks.append(i[1])
 
 for i in peaks75:
-    if 390 < i[0] < 400:
+    if 840 < i[0] < 850:
         bons_peaks.append(i[1])
 
 for i in peaks100:
-    if 390 < i[0] < 400:
+    if 840 < i[0] < 850:
         bons_peaks.append(i[1])
 
 # plt.plot(alco, bons_peaks)
@@ -47,17 +47,21 @@ for i in peaks100:
 
 pente, valinit = np.polyfit(alco, bons_peaks, 1)
 
+x = np.linspace(0,100, 1000)
+
+projection = pente*x + valinit
+
 rhum_blanc = RamanSpectrum("Mesures bonnes\/rhum_blanc1_1.txt", 1800)
 rhum_brun =  RamanSpectrum("Mesures bonnes/rhum_brun1_1.txt", 1800)
 abso_vodk = RamanSpectrum("Mesures bonnes/absolut11_1_abso.txt", 1800)
 smir_vodk = RamanSpectrum("Mesures bonnes\smirnoff1_1_smir.txt", 1800)
 good_alc = RamanSpectrum("Mesures bonnes\good_alcool1_1.txt", 1800)
 bad_alc = RamanSpectrum("Mesures bonnes/bad_alcool1_1.txt", 1800)
-abso_vodk.graph_zero()
-plt.show()
+# abso_vodk.graph_zero()
+# plt.show()
 
 for i in rhum_blanc.getDanPeaks():
-    if 390 < i[0] < 400:
+    if 840 < i[0] < 850:
         rhum_blanc_peak = i[1]
 
 for i in rhum_brun.getDanPeaks():
@@ -98,6 +102,7 @@ x_bad_alc_theo = 93
 liste_theo = [x_good_alc_theo, x_bad_alc_theo, x_rhum_blanc_theo, x_rhum_brun_theo]
 fig, ax = plt.subplots(2)
 ax[0].plot(alco, bons_peaks, label = '''Courbe théorique de l'éthanol''')
+ax[0].plot(x, projection, "--", color="black", label = '''Projection''')
 ax[0].plot(abso_vodk_true, abso_vodk_peak, 'o', color = 'black', label = 'Abso Vodk')
 ax[0].plot(smir_vodk_theo, smir_vodk_peak, 'v', color = 'black')
 ax[0].plot(smir_vodk_true, smir_vodk_peak, 'o', color = 'pink', label = 'Smir Vodk')
@@ -115,12 +120,13 @@ ax[0].set_ylabel('Nombre de photons')
 ax[0].legend()
 for xc in liste_theo:
     ax[0].axvline(x=xc, linestyle = '--')
-ax[1].plot(danpeaks25, label = '25')
-ax[1].plot(danpeaks50, label = '50')
-ax[1].plot(danpeaks75, label = '75')
-ax[1].plot(danpeaks100, label = '100')
-ax[1].set_xlim([350,450])
-ax[1].set_ylim([0,40000])
+print(danpeaks25[0])
+ax[1].plot(danpeaks25[:,0], danpeaks25[:,1], label = '25')
+ax[1].plot(danpeaks50[:,0], danpeaks50[:,1], label = '50')
+ax[1].plot(danpeaks75[:,0], danpeaks75[:,1], label = '75')
+ax[1].plot(danpeaks100[:,0], danpeaks100[:,1], label = '100')
+ax[1].set_xlim([820,870])
+ax[1].set_ylim([0,35000])
 ax[1].legend()
 plt.show()
-print(len(liste_theo))
+
