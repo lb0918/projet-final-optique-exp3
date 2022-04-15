@@ -21,11 +21,13 @@ class RamanSpectrum:
         plt.plot(self.raman, self.counts, label=f'{self.name}')
         if peaks:
             for x in self.peaks:
-                plt.plot(x[0], x[1], 'o', color='red')
+                plt.plot(x[0], x[1], 'o', color='red', label = self.name)
                 plt.text(x[0], x[1] + 0.5, '({}, {})'.format(x[0], x[1]))
         plt.legend()
-        plt.xlabel('Raman shift')
+        plt.xlabel('Raman shift [1/cm]')
         plt.ylabel('Counts')
+        plt.legend()
+        # plt.title('Spectre complet éthanol à 25%')
     def graph_zero(self, peaks=False):
         liste = list(zip(self.raman, self.counts))
         raman = []
@@ -34,6 +36,10 @@ class RamanSpectrum:
             if x[0] >= 0:
                 raman.append(x[0])
                 counts.append(x[1])
+        plt.legend()
+        plt.xlabel('Raman shift')
+        plt.ylabel('Counts')
+        # plt.title('Spectre tronqué éthanol à 100%')
         plt.plot(raman, counts, label=f'{self.name}')
         if peaks:
             for x in self.peaks:
@@ -61,9 +67,11 @@ class RamanSpectrum:
             points_maxi.append(ens_fin[int(x)])
         return points_maxi
 
-    def codeDan(self):
+    def codeDan(self, *args):
         px = [625, 882, 1134, 1149]
         nm = [671, 690, 708, 709]
+        # px = [611, 867, 1119, 1134]
+        # nm = [671, 690, 708, 709]
 
         slope, intercept, r_value, p_value, std_err = stats.linregress(px, nm)
         print(f"a={slope:.5f}", f"b={intercept:.3f}",f"σ={std_err:.3e}")
@@ -104,12 +112,21 @@ class RamanSpectrum:
             mask_1661 = (cm[200:1200] > 1600) & (cm[200:1200] < 1700)
             I_1444 = max(y[mask_1444])
             I_1661 = max(y[mask_1661])
-            # plt.plot(cm[200:1200], f2(cm[200:1200]), label=f"{soln}", linewidth=0.5) # Background
-            # plt.plot(cm[200:1200], y+2*i, label=f"{soln}", linewidth=0.5)
+            if args == "plot":
+                plt.plot(cm[200:1200], f2(cm[200:1200]), label=f"{soln}", linewidth=0.5) # Background
+                plt.plot(cm[200:1200], y+2*i, label=f"{soln}", linewidth=0.5)
             print(f"r: {I_1444/I_1661*100:.2f}%")
             i += 1
 
+        # self.data_Dan = np.array([cm[200:1200], y]).T
         self.data_Dan = np.array([cm[200:1200], y]).T
+        # res = []
+        # res2 = []
+        # for x in self.data_Dan:
+        #     res.append(x[1])
+        #     res2.append(x[0])
+        return self.data_Dan
+        # return res
 
         #plt.xlabel("ν [1/cm]")
         #plt.ylabel("Intensité relative [-]")
@@ -136,3 +153,29 @@ class RamanSpectrum:
             points_maxi.append(ens_fin[int(x)])
         return points_maxi
 
+eth25 = RamanSpectrum('Mesures bonnes\eth_251_1.txt', 1000)
+eth50 = RamanSpectrum('Mesures bonnes\eth_501_1.txt', 1000) 
+eth75 = RamanSpectrum('Mesures bonnes\eth_751_1.txt', 1000) 
+eth100 = RamanSpectrum('Mesures bonnes\eth_1001_1.txt', 1000) 
+
+# print(eth25.codeDan())
+# plt.plot(eth25.codeDan()[:, 0], eth25.codeDan()[:, 1])
+# plt.xlabel('Raman shift [1/cm]')
+# plt.ylabel('Counts')
+# plt.title('Spectre tronqué et ajusté éthanol à 25%')
+# plt.show()
+# plt.plot(eth50.codeDan()[:, 0], eth50.codeDan()[:, 1])
+# plt.xlabel('Raman shift [1/cm]')
+# plt.ylabel('Counts')
+# plt.title('Spectre tronqué et ajusté éthanol à 50%')
+# plt.show()
+# plt.plot(eth75.codeDan()[:, 0], eth75.codeDan()[:, 1])
+# plt.xlabel('Raman shift [1/cm]')
+# plt.ylabel('Counts')
+# plt.title('Spectre tronqué et ajusté éthanol à 75%')
+# plt.show()
+# plt.plot(eth100.codeDan()[:, 0], eth100.codeDan()[:, 1])
+# plt.xlabel('Raman shift [1/cm]')
+# plt.ylabel('Counts')
+# plt.title('Spectre tronqué et ajusté éthanol à 100%')
+# plt.show()
