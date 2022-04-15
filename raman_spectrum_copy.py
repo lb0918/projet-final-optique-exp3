@@ -120,13 +120,7 @@ class RamanSpectrum:
 
         # self.data_Dan = np.array([cm[200:1200], y]).T
         self.data_Dan = np.array([cm[200:1200], y]).T
-        # res = []
-        # res2 = []
-        # for x in self.data_Dan:
-        #     res.append(x[1])
-        #     res2.append(x[0])
         return self.data_Dan
-        # return res
 
         #plt.xlabel("ν [1/cm]")
         #plt.ylabel("Intensité relative [-]")

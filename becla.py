@@ -61,26 +61,26 @@ for i in rhum_blanc.getDanPeaks():
         rhum_blanc_peak = i[1]
 
 for i in rhum_brun.getDanPeaks():
-    if 390 < i[0] < 400:
+    if 840 < i[0] < 850:
         rhum_brun_peak = i[1]
 
 for i in abso_vodk.getDanPeaks():
-    if 390 < i[0] < 400:
+    if 840 < i[0] < 850:
         abso_vodk_peak = i[1]
 
 for i in smir_vodk.getDanPeaks():
-    if 390 < i[0] < 400:
+    if 840 < i[0] < 850:
         smir_vodk_peak = i[1]
 
 for i in good_alc.getDanPeaks():
-    if 390 < i[0] < 400:
+    if 840 < i[0] < 850:
         good_alc_peak = i[1]
 
 for i in bad_alc.getDanPeaks():
-    if 390 < i[0] < 400:
+    if 840 < i[0] < 850:
         bad_alc_peak = i[1]
 
-anne = RamanSpectrum('Absorption/anne2_1_1.txt', 1000)
+
 print('ici')
 print((rhum_blanc_peak-valinit)/pente)
 abso_vodk_true = (abso_vodk_peak-valinit)/pente
@@ -124,7 +124,3 @@ ax[1].set_ylim([0,40000])
 ax[1].legend()
 plt.show()
 print(len(liste_theo))
-# var = anne.codeDan()
-plt.plot(anne.codeDan())
-plt.show()
-print(peaks25)
