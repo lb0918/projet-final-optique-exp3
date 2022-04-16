@@ -1,12 +1,22 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from becla import x, projection, alco, bons_peaks
+from becla import x, projection, alco, bons_peaks, danpeaks75, danpeaks50, danpeaks100, danpeaks25
 
 
-plt.plot(alco, bons_peaks, "o", label="Données expérimentales")
-plt.plot(x, projection, "--", color="black", label="Régression linéaire")
-plt.ylabel("Nombre de photons")
-plt.xlabel("Pourcentage d'alcool")
-plt.legend()
-plt.savefig("figures\/reg_lin")
+fig, ax = plt.subplots(2)
+ax[0].plot(alco, bons_peaks, "o", label = '''Pics des solutions d'éthanol''')
+ax[0].plot(x, projection, "--", color="black", label = '''Régression linéaire''')
+ax[0].set_xlabel('''Pourcentage d'alcool [%]''')
+ax[0].set_ylabel('Nombre de photons')
+ax[0].legend()
+print(danpeaks25[0])
+ax[1].plot(danpeaks25[:,0], danpeaks25[:,1], label = '25%')
+ax[1].plot(danpeaks50[:,0], danpeaks50[:,1], label = '50%')
+ax[1].plot(danpeaks75[:,0], danpeaks75[:,1], label = '75%')
+ax[1].plot(danpeaks100[:,0], danpeaks100[:,1], label = '100%')
+ax[1].set_xlabel('''Raman shift [cm$^{-1}$]''')
+ax[1].set_ylabel('Nombre de photons')
+ax[1].set_xlim([820,870])
+ax[1].set_ylim([0,35000])
+ax[1].legend()
 plt.show()
