@@ -18,14 +18,17 @@ class RamanSpectrum:
         self.name = fich
 
     def graph(self, peaks=False):
-        plt.plot(self.raman, self.counts, label=f'{self.name}')
+        plt.plot(self.raman, self.counts, label=f'{self.name}', lw=3)
         if peaks:
             for x in self.peaks:
                 plt.plot(x[0], x[1], 'o', color='red')
+
                 plt.text(x[0], x[1] + 0.5, '({}, {})'.format(x[0], x[1]))
         plt.legend()
         plt.xlabel('Raman shift')
         plt.ylabel('Counts')
+
+
     def graph_zero(self, peaks=False):
         liste = list(zip(self.raman, self.counts))
         raman = []
@@ -114,13 +117,6 @@ class RamanSpectrum:
 
         self.data_Dan = np.array([cm[200:1200], y]).T
         return self.data_Dan
-
-        #plt.xlabel("ν [1/cm]")
-        #plt.ylabel("Intensité relative [-]")
-        #plt.legend(loc="upper center", ncol=i, bbox_to_anchor=(0.5, 1.1))
-        #plt.savefig("Raman_huiles.png")
-        #plt.show()
-        #plt.clf()
 
     def getDanPeaks(self):
         self.codeDan()
