@@ -1,0 +1,21 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from absorption import Absorption
+
+
+vide = Absorption("Absorption\/vide_ref.txt")
+rhum_brun = Absorption("Absorption\/rhum_brun_USB2G573481_001.txt")
+rhum_blanc = Absorption("Absorption\Bacardi_USB2G573481_001.txt")
+absolut = Absorption("Absorption\Absolut_USB2G573481_001.txt")
+smirnoff = Absorption("Absorption\smirnoff_USB2G573481_001.txt")
+
+vide.graph("Faisceau incident")
+rhum_brun.graph("Rhum brun")
+rhum_blanc.graph("Rhum blanc")
+absolut.graph("Vodka Absolut")
+smirnoff.graph("Vodka Smirnoff")
+plt.xlim(400, 800)
+plt.ylabel("Nombre de photons")
+plt.xlabel("Longueur d'onde [nm]")
+plt.legend()
+plt.show()
