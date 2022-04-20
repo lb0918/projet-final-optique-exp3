@@ -1,12 +1,36 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from becla import *
+from transmission_calculs import vide_m, rhumbrun_m, rhumblanc_m, smirnoff_m, absolut_m
 
 print("abso:", abso_vodk_true, abso_vodk_peak)
 print("rbrun:", x_rhum_brun_true, rhum_brun_peak,)
 print("smirn:", smir_vodk_true, smir_vodk_peak)
 print("rblanc:", x_rhum_blanc_true, rhum_blanc_peak)
 print("artis:", x_good_alc_true, good_alc_peak)
+
+
+### CORRECTION ABSORPTION ###
+abso_count = abso_vodk_peak * vide_m / absolut_m
+smirn_count = smir_vodk_peak * vide_m / smirnoff_m
+rbrun_count = rhum_brun_peak * vide_m / rhumbrun_m
+rblanc_count = rhum_blanc_peak * vide_m / rhumblanc_m
+
+print("abso peak norm:", abso_vodk_true, abso_vodk_peak)
+print("rbrun peak norm:", x_rhum_brun_true, rhum_brun_peak,)
+print("smirn peak norm:", smir_vodk_true, smir_vodk_peak)
+print("rblanc peak norm:", x_rhum_blanc_true, rhum_blanc_peak)
+
+# Pourcentage d'alcool
+abso_norm = (abso_count-valinit)/pente
+smirn_norm = (smirn_count-valinit)/pente
+rbrun_norm = (rbrun_count-valinit)/pente
+rblanc_norm = (rblanc_count-valinit)/pente
+
+print("abso norm:", abso_norm)
+print("rbrun norm:", rbrun_norm)
+print("smirn norm:", smirn_norm)
+print("rblanc norm:", rblanc_norm)
 
 
 #plt.plot(alco, bons_peaks, label = '''Courbe théorique de l'éthanol''')
