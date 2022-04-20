@@ -27,10 +27,10 @@ smirn_norm = (smirn_count-valinit)/pente
 rbrun_norm = (rbrun_count-valinit)/pente
 rblanc_norm = (rblanc_count-valinit)/pente
 
-print("abso norm:", abso_norm)
-print("rbrun norm:", rbrun_norm)
-print("smirn norm:", smirn_norm)
-print("rblanc norm:", rblanc_norm)
+print("abso norm:", abso_norm, abso_count)
+print("rbrun norm:", rbrun_norm, rbrun_count)
+print("smirn norm:", smirn_norm, smirn_count)
+print("rblanc norm:", rblanc_norm, rblanc_count)
 
 
 #plt.plot(alco, bons_peaks, label = '''Courbe théorique de l'éthanol''')
