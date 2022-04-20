@@ -2,6 +2,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 from becla import *
 
+print("abso:", abso_vodk_true, abso_vodk_peak)
+print("rbrun:", x_rhum_brun_true, rhum_brun_peak,)
+print("smirn:", smir_vodk_true, smir_vodk_peak)
+print("rblanc:", x_rhum_blanc_true, rhum_blanc_peak)
+print("artis:", x_good_alc_true, good_alc_peak)
+
 
 #plt.plot(alco, bons_peaks, label = '''Courbe théorique de l'éthanol''')
 plt.plot(x, projection, "--", label = '''Concentrations affichées''')
